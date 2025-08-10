@@ -27,7 +27,7 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <div 
+      <div
         style={{
           height: '100vh',
           background: 'linear-gradient(to right, #ff9671, #ffc75f)',
@@ -36,7 +36,8 @@ const Home = () => {
           justifyContent: 'center',
           alignItems: 'center',
           textAlign: 'center',
-          padding: '20px'
+          padding: '20px',
+          paddingBottom: '80px', // extra space for footer
         }}
       >
         <h1 className="text-white fw-bold fs-2 mb-3">Welcome to Developer Hub</h1>
@@ -52,6 +53,16 @@ const Home = () => {
           </Link>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer
+        className="text-center text-white"
+        style={{ backgroundColor: '#ff6f61', padding: '15px 0', position: 'fixed', width: '100%', bottom: 0 }}
+      >
+        <div>
+          Developed by Ajay Kumar Gaddam | Email: <a href="mailto:gaddamajaykumar1@gmail.com" className="text-white">gaddamajaykumar1@gmail.com</a>
+        </div>
+      </footer>
     </>
   );
 };

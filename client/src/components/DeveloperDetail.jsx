@@ -56,46 +56,46 @@ const DeveloperDetail = () => {
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     if (!token) {
       navigate("/login");
       return;
     }
-  }, [token, navigate]);
 
-  const fetchDeveloper = async () => {
-    try {
-      const res = await axios.get(`http://localhost:5000/api/users/profile/${id}`, {
-        headers: { "x-token": token },
-      });
-      setDeveloper(res.data);
-    } catch (error) {
-      console.error("Failed to fetch developer details", error);
-      navigate("/");
-    }
-  };
+    const fetchDeveloper = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/users/profile/${id}`, {
+          headers: { "x-token": token },
+        });
+        setDeveloper(res.data);
+      } catch (error) {
+        console.error("Failed to fetch developer details", error);
+        navigate("/");
+      }
+    };
 
-  const fetchReviews = async () => {
-    try {
-      const res = await axios.get(`http://localhost:5000/api/users/myreviews/${id}`, {
-        headers: { "x-token": token },
-      });
-      setReviews(res.data);
-    } catch (error) {
-      console.error("Failed to fetch reviews", error);
-      setReviews([]);
-    }
-  };
+    const fetchReviews = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/users/myreviews/${id}`, {
+          headers: { "x-token": token },
+        });
+        setReviews(res.data);
+      } catch (error) {
+        console.error("Failed to fetch reviews", error);
+        setReviews([]);
+      }
+    };
 
-  useEffect(() => {
     const fetchAll = async () => {
       setLoading(true);
       await fetchDeveloper();
       await fetchReviews();
       setLoading(false);
     };
+
     fetchAll();
-  }, [id]);
+  }, [id, token, navigate]);
 
   if (loading) return <div className="container mt-4">Loading...</div>;
   if (!developer) return <div className="container mt-4">Developer not found</div>;
@@ -137,7 +137,19 @@ const DeveloperDetail = () => {
           </ul>
         )}
 
-        <AddReviewForm developerId={id} onReviewAdded={fetchReviews} />
+        <AddReviewForm developerId={id} onReviewAdded={() => {
+          // Refresh reviews after adding new one
+          (async () => {
+            try {
+              const res = await axios.get(`http://localhost:5000/api/users/myreviews/${id}`, {
+                headers: { "x-token": token },
+              });
+              setReviews(res.data);
+            } catch {
+              setReviews([]);
+            }
+          })();
+        }} />
 
         <Link to="/dashboard" className="btn btn-secondary mt-4">
           Back to Developers

@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import Reviews from './components/Reviews';
 import DeveloperDetail from './components/DeveloperDetail';
 import PrivateRoute from './components/PrivateRoute';
+import AddPost from './components/addpost';
 
 function App() {
   return (
@@ -27,7 +28,12 @@ function App() {
         <Route path="/profile" element={<Profile/>} />
           <Route path="/reviews" element={<Reviews />} />
         <Route path="/developer/:id" element={<DeveloperDetail />} />
-        
+        <Route path="/addpost" element={
+          <PrivateRoute>
+            <AddPost />
+          </PrivateRoute>
+        } />  
+      
       </Routes>
     </Router>
   );

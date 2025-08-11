@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-   "client": "npm start --prefix ../client",
+    "client": "npm start --prefix ../client",
     "both": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "ajay kumar",
@@ -17,7 +17,8 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.17.1"
+    "mongoose": "^8.17.1",
+    "multer": "^2.0.2"
   },
   "devDependencies": {
     "concurrently": "^9.2.0",

@@ -5,7 +5,7 @@ const User = require("../model/User");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Review = require("../model/reviewmodel");
-const middleware = require("../middleWare/middleware");
+const middleware = require("../middleware/middleware");
 const reviewmodel = require("../model/reviewmodel");
 
 // Register Route
@@ -134,7 +134,10 @@ router.post("/addreview", middleware, async (req, res) => {
 
 router.get("/myreviews", middleware, async (req, res) => {
   try { 
-    const reviews = await reviewmodel.find();
+   const reviews = await reviewmodel.find()
+            .populate('taskprovider', 'name')    // populate taskprovider field with user's name
+            .populate('taskWorker', 'name');     // populate taskWorker field with user's name
+
     let userReviews = reviews.filter(review => review.taskWorker.toString() === req.user.id);
     if (userReviews.length === 0) {
       return res.status(404).json({ message: "No reviews found for this user" });
@@ -148,7 +151,8 @@ router.get("/myreviews", middleware, async (req, res) => {
 });
 router.get("/profile/:id", middleware, async (req, res) => {
   try {
-    const userProfile = await User.findById(req.params.id);
+    const userProfile = await User.findById(req.params.id)
+      .populate("taskWorker", "name");
     if (!userProfile) return res.status(404).json({ message: "User not found" });
     res.status(200).json(userProfile);
   } catch (error) {
@@ -157,7 +161,8 @@ router.get("/profile/:id", middleware, async (req, res) => {
 });
 router.get("/myreviews/:id", middleware, async (req, res) => {
   try {
-    const reviews = await Review.find({ taskprovider: req.params.id });
+
+    const reviews = await Review.find({ taskprovider: req.params.id }).populate('taskWorker', 'name');
     res.status(200).json(reviews);
   } catch (error) {
     res.status(500).json({ message: "Server error" });

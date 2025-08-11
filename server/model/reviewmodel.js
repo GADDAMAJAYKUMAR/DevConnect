@@ -1,19 +1,21 @@
-const mongoose=require("mongoose");
-const reviewSchema=new mongoose.Schema({
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-    taskprovider:{
-        type : String,
-        required : true
-    },
+const reviewSchema = new Schema({
+  taskprovider: {
+    type: Schema.Types.ObjectId,
+    ref: "User",  // Reference to User model
+    required: true,
+  },
+  taskWorker: {
+    type: Schema.Types.ObjectId,
+    ref: "User",  // Reference to User model
+    required: true,
+  },
+  rating: {
+    type: Number,  // Use Number for ratings (1-5)
+    required: true,
+  },
+});
 
-    taskWorker:{
-        type : String,
-        required : true
-    },
-
-    rating:{
-        type : String,
-        required : true
-    }
-})
-module.exports = mongoose.model("reviewmodel",reviewSchema);
+module.exports = mongoose.model("reviewmodel", reviewSchema);

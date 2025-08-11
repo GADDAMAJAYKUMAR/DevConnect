@@ -5,7 +5,7 @@ const User = require("../model/User");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Review = require("../model/reviewmodel");
-const middleware = require("../middleware/middleware");
+const middleware = require("../middleWare/middleware");
 const reviewmodel = require("../model/reviewmodel");
 
 // Register Route

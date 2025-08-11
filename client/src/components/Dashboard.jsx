@@ -21,7 +21,7 @@ const Dashboard = () => {
       }
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/posts/getallposts?page=1&limit=10",
+          "https://devconnect-ct6s.onrender.com/api/posts/getallposts?page=1&limit=10",
           {
             headers: { "x-token": token },
           }
@@ -50,7 +50,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        `http://localhost:5000/api/users/myreviews/${authorId}`,
+        `https://devconnect-ct6s.onrender.com/api/users/myreviews/${authorId}`,
         { headers: { "x-token": token } }
       );
       setReviews(res.data);
@@ -97,7 +97,7 @@ const Dashboard = () => {
     }
     try {
       await axios.post(
-        "http://localhost:5000/api/users/addreview",
+        "https://devconnect-ct6s.onrender.com/api/users/addreview",
         { taskprovider: selectedAuthorId, rating: Number(ratingInput) },
         { headers: { "x-token": token } }
       );

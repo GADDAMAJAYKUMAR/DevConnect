@@ -6,7 +6,7 @@ const path = require('path');
 const postModel = require('../model/postmodel');
 const Like = require('../model/like');
 const Comment = require('../model/comment');
-const middleware = require('../middleware/middleware');
+const middleware = require('../middleWare/middleware');
 
 // Multer setup: store uploads in 'uploads/' folder
 const storage = multer.diskStorage({

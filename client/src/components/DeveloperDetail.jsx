@@ -16,7 +16,7 @@ const AddReviewForm = ({ developerId, onReviewAdded }) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/users/addreview",
+        "https://devconnect-ct6s.onrender.com/api/users/addreview",
         { taskprovider: developerId, rating: Number(rating) },
         { headers: { "x-token": token } }
       );

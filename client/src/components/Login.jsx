@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
 
     // Using promise style
-    axios.post('http://localhost:5000/api/users/login', formData)
+    axios.post('https://devconnect-ct6s.onrender.com/api/users/login', formData)
       .then(res => {
         if (res.data.token) {
           localStorage.setItem('token', res.data.token);

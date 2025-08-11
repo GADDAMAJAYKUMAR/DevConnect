@@ -15,7 +15,7 @@ const Reviews = () => {
       }
       try {
         // eslint-disable-next-line no-undef
-        const res = await axios.get(`http://localhost:5000/api/users/myreviews/${authorId}`, {
+        const res = await axios.get(`https://devconnect-ct6s.onrender.com/api/users/myreviews/${authorId}`, {
           headers: { 'x-token': token },
         });
         setReviews(res.data);

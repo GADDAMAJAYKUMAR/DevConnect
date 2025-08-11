@@ -41,7 +41,7 @@ const AddPost = () => {
       });
 
       await axios.post(
-        "http://localhost:5000/api/posts/addPost",
+        "https://devconnect-ct6s.onrender.com/api/posts/addPost",
         formData,
         {
           headers: {

@@ -40,7 +40,7 @@ const AddPost = () => {
         formData.append("images", file); // backend expects 'images' array
       });
 
-      const res = await axios.post(
+      await axios.post(
         "http://localhost:5000/api/posts/addPost",
         formData,
         {
